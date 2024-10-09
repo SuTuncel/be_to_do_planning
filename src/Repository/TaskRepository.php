@@ -10,10 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
 
-/**
- * Class TaskRepository
- * @package App\Repository
- */
 class TaskRepository extends ServiceEntityRepository
 {
     /** @var EntityManagerInterface */

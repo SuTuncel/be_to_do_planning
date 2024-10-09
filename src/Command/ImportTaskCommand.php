@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ImportTaskCommand extends Command
 {
-    protected static $defaultName = 'app:import-mocks-task';
+    protected static $defaultName = 'app:import-mocks-task'; // php bin/console app:import-mocks-task
 
     /**
      * @var TaskProviderFactory
@@ -41,7 +41,10 @@ class ImportTaskCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $providers = ['MockOneProvider', 'MockTwoProvider'];
+        $providers = [
+            'App\Service\MockOneProvider',
+            'App\Service\MockTwoProvider',
+        ];
 
         foreach ($providers as $providerName) {
             $provider = $this->taskProviderFactory->getProvider($providerName);
@@ -52,13 +55,13 @@ class ImportTaskCommand extends Command
                 foreach ($tasks as $task) {
                     $taskEntity = new Task();
 
-                    if ($providerName === 'Mock1Provider') {
+                    if ($providerName === 'App\Service\MockOneProvider') {
                         $taskEntity->setName('Task ' . $task['id']);
                         $taskEntity->setDifficulty($task['value']);
                         $taskEntity->setDuration($task['estimated_duration']);
                     }
 
-                    if ($providerName === 'Mock2Provider') {
+                    if ($providerName === 'App\Service\MockTwoProvider') {
                         $taskEntity->setName('Task ' . $task['id']);
                         $taskEntity->setDuration($task['sure']);
                         $taskEntity->setDifficulty($task['zorluk']);

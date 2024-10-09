@@ -14,7 +14,7 @@ class TaskProviderFactory
     public function getProvider(string $providerName): ?TaskProviderInterface
     {
         foreach ($this->providers as $provider) {
-            if ($provider instanceof $providerName) {
+            if (get_class($provider) === $providerName) {
                 return $provider;
             }
         }

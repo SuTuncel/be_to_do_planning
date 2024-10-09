@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Task Scheduling</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>Task Organizing</h1>
+
+    <h2>Total Duration: {{ totalWeeks }} week(s)</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Developer</th>
+            <th>Task ID</th>
+            <th>Task Name</th>
+            <th>Required Weeks</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for developer, tasks in developerSchedules %}
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ developer }}</td>
+                    <td>{{ task.task_id }}</td>
+                    <td>{{ task.task_name }}</td>
+                    <td>{{ task.weeks_required }} week(s)</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    </body>
+    </html>
+{% endblock %}
