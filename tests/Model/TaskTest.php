@@ -19,14 +19,14 @@ class TaskTest extends KernelTestCase
         $developerEntity = new Developer();
         $developerEntity->setName('DEV1');
         $developerEntity->setLevel(2);
-        $developerEntity->setHour(1.0);
+        $developerEntity->setHour(1);
 
         $em->persist($developerEntity);
         $em->flush();
 
         $taskEntity = new Task();
         $taskEntity->setName('trial');
-        $taskEntity->setDuration(5.0);
+        $taskEntity->setDuration(5);
         $taskEntity->setDifficulty(3);
         $taskEntity->setDeveloper($developerEntity);
 
@@ -36,7 +36,7 @@ class TaskTest extends KernelTestCase
         $task = $em->getRepository(Task::class)->find($taskEntity->getId());
 
         $this->assertEquals('trial', $task->getName());
-        $this->assertEquals(5.0, $task->getDuration());
+        $this->assertEquals(5, $task->getDuration());
         $this->assertEquals(2, $task->getDifficulty());
         $this->assertEquals($developerEntity->getId(), $task->getDeveloper()->getId());
     }

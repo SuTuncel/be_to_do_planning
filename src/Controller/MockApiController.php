@@ -11,7 +11,7 @@ class MockApiController extends AbstractController
     /**
      * @Route("/api/mock-one", name="mock_one_api")
      */
-    public function getMockOneData(): JsonResponse
+    public function getMockOne(): JsonResponse
     {
         $filePath = __DIR__ . '/../../public/mock/mock-one.txt';
 
@@ -32,7 +32,7 @@ class MockApiController extends AbstractController
     /**
      * @Route("/api/mock-two", name="mock_two_api")
      */
-    public function getMockTwoData(): JsonResponse
+    public function getMockTwo(): JsonResponse
     {
         $filePath = __DIR__ . '/../../public/mock/mock-two.txt';
 

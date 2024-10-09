@@ -4,26 +4,26 @@ namespace App\Repository;
 
 use App\Entity\Developer;
 use App\Entity\Task;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
 
-class DeveloperRepository extends EntityRepository
+class DeveloperRepository extends ServiceEntityRepository
 {
     /** @var EntityManagerInterface */
     private EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $em, Mapping\ClassMetadata $class)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
     {
+        parent::__construct($registry, Developer::class);
         $this->em = $em;
-        parent::__construct($em, $class);
     }
 
     /**
      * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->findAll();
     }
@@ -40,19 +40,18 @@ class DeveloperRepository extends EntityRepository
      * @param Developer $developer
      * @throws ORMException
      */
-    public function save(Developer $developer)
+    public function save(Developer $developer): void
     {
-        $this->_em->persist($developer);
-        $this->_em->flush();
+        $this->em->persist($developer);
+        $this->em->flush();
     }
 
     /**
-     * @return float
+     * @return int
      */
-    private function findEstimatedHour(Task $task)
+    private function findEstimatedHour(Task $task): int
     {
         return $task->getDuration() * $task->getDifficulty();
-
     }
 
     /**

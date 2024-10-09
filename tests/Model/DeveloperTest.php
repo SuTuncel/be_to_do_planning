@@ -18,7 +18,7 @@ class DeveloperTest extends KernelTestCase
         $entity = new Developer();
         $entity->setName('DEV1');
         $entity->setLevel(1);
-        $entity->setHour(2.0);
+        $entity->setHour(2);
 
         $em->persist($entity);
         $em->flush();

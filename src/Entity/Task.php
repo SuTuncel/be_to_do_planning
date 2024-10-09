@@ -22,7 +22,7 @@ class Task
     private $name;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="integer")
      */
     private $duration;
 
@@ -33,7 +33,7 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Developer", inversedBy="tasks")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $developer;
 

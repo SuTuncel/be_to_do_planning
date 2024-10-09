@@ -5,24 +5,24 @@ namespace App\Repository;
 use App\Domain\Exception\InvalidArgumentException;
 use App\Entity\Developer;
 use App\Entity\Task;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
 
 /**
  * Class TaskRepository
- * @package App\Infrastructure\Repository
+ * @package App\Repository
  */
-class TaskRepository extends EntityRepository
+class TaskRepository extends ServiceEntityRepository
 {
     /** @var EntityManagerInterface */
     private EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $em, Mapping\ClassMetadata $class)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
     {
+        parent::__construct($registry, Task::class);
         $this->em = $em;
-        parent::__construct($em, $class);
     }
 
     /**
@@ -31,8 +31,8 @@ class TaskRepository extends EntityRepository
      */
     public function save(Task $task)
     {
-        $this->_em->persist($task);
-        $this->_em->flush();
+        $this->em->persist($task);
+        $this->em->flush();
     }
 
     /**
